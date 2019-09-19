@@ -1,6 +1,6 @@
 # desktop-note
 
-##项目文档
+## 项目文档
 
 项目名称：_桌面记_
 
@@ -8,7 +8,7 @@
 
 项目版本：_0.0.1_
 
-项目技术栈：electron + vue + vuex + vue-router + local 存储 + 文件操作等等
+项目技术栈：_electron + vue + vuex + vue-router + local 存储 + 文件操作等等_
 
 项目描述：
 

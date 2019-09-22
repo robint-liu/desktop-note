@@ -1,5 +1,4 @@
 /*
- *  基本的功能：entry、output、loader、resolve、plugins
  *  content：entry, output, loader, resolve, some plugins
  *  考虑点：
  *    一、入口
@@ -25,5 +24,30 @@ module.exports = {
     path: path.resolve(__dirname, "../dist"),
     filename: "js/[name].bundle.js",
     publicPath: "/"
+  },
+  // 模块解析
+  resolve: {
+    extensions: [".vue", ".jsx", ".js", ".json"],
+    alias: {
+      "@components": path.join(__dirname, "../src/components"),
+      "@common": path.join(__dirname, "../src/common"),
+      "@assets": path.join(__dirname, "../src/assets"),
+      "@views": path.join(__dirname, "../src/views"),
+      "@mock": path.join(__dirname, "../src/mock"),
+      "@util": path.join(__dirname, "../src/util"),
+      "@src": path.join(__dirname, "../src"),
+      "@lib": path.join(__dirname, "../lib")
+    }
+  },
+  // 外部扩展
+  externals: {
+    // react: "React",
+    // "react-dom": "ReactDOM",
+    // "hlj-components": path.join(
+    //   __dirname,
+    //   "../node_modules/@hlj/hlj-components"
+    // ),
+    // antd: "Antd",
+    // bizCharts: "BizCharts"
   }
 };

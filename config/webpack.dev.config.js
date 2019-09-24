@@ -1,11 +1,28 @@
 /*
  *  content：webpack.base.config.js + devServer
- *  考虑点：
- *    一、入口
- *     1、使用路由时，进行单入口打包；
- *     2、不使用路由时，进行多入口打包；
  * */
 
+const path = require("path");
+const merge = require("webpack-merge");
+const proxyOptions = require("./auxiliary-config/proxy-options");
 const baseConfig = require("./webpack.base.config");
 
-module.exports = baseConfig;
+let devServer = {
+  historyApiFallback: true, // index.html很可能必须提供该页面来代替任何404响应。
+  hot: true, // Enables Hot Module Replacement (see devServer.hot) without page refresh as fallback in case of build failures.
+  overlay: true, // Shows a full-screen overlay in the browser when there are compiler errors or warnings
+  noInfo: true, // Tells dev-server to supress messages like the webpack bundle information. Errors and warnings will still be shown.
+  host: "127.0.0.1", //主机
+  port: 8088, // 端口
+  inline: true, // 自动刷新
+  open: true,
+  contentBase: path.join(__dirname, "../dist")
+};
+
+if (process.env.NODE_ENV === "proxy") {
+  devServer = Object.assign(devServer, { proxy: { "/mock": proxyOptions } });
+}
+
+module.exports = merge(baseConfig, {
+  devServer
+});

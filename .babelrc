@@ -1,4 +1,4 @@
-module.exports = {
+{
   presets: ["@vue/app", "@babel/preset-env"],
   plugins: [
     "react-hot-loader/babel",
@@ -10,4 +10,4 @@ module.exports = {
       }
     ]
   ]
-};
+}

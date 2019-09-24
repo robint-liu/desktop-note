@@ -49,7 +49,7 @@ Object.keys(entries).forEach(function(name) {
       template: path.resolve(__dirname, "../public/index.html"),
       hash: true,
       title: "",
-      filename: name + ".htm",
+      filename: "index.htm",
       inject: true
     });
     plugins.push(plugin);
@@ -66,7 +66,7 @@ module.exports = {
     pathinfo: true,
     path: path.resolve(__dirname, "../dist"),
     filename: "js/[name].bundle.js",
-    publicPath: "../dist"
+    publicPath: "/"
   },
   // 模块解析
   resolve: {
@@ -116,7 +116,7 @@ module.exports = {
         test: /\.(sass|scss)$/,
         exclude: "/node_modules/",
         loader: [
-          "style-loader", // Adds CSS to the DOM by injecting a <style> tag
+          MiniCssExtractPlugin.loader, // Adds CSS to the DOM by injecting a <style> tag
           "css-loader", // The css-loader interprets @import and url() like import/require() and will resolve them
           "postcss-loader", // PostCSS is a tool for transforming styles with JS plugins，The Autoprefixer PostCSS plugin is one of the most popular CSS processors.
           "fast-sass-loader" // Blazingly fass loader for webpack

@@ -10,7 +10,6 @@
     "serve": "vue-cli-service serve",
     "test:e2e": "vue-cli-service test:e2e",
     "start": "electron .",
-
     "build_dev": "webpack --config ./config/webpack.base.config.js --progress --colors --mode=development",
     "build_dev_watch": "webpack --watch --config ./config/webpack.base.config.js --mode=development --progress --colors",
     "build_pro": "webpack --config ./config/webpack.pro.config.js --mode=production --progress --colors",
@@ -28,6 +27,8 @@
     "core-js": "^2.6.9",
     "lodash": "^4.17.15",
     "moment-locales-webpack-plugin": "^1.1.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1",

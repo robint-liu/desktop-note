@@ -10,12 +10,12 @@
     "serve": "vue-cli-service serve",
     "test:e2e": "vue-cli-service test:e2e",
     "start": "electron .",
-    "build_dev": "webpack --config ./config/webpack.base.config.js --progress --colors --mode=development",
-    "build_dev_watch": "webpack --watch --config ./config/webpack.base.config.js --mode=development --progress --colors",
-    "build_pro": "webpack --config ./config/webpack.pro.config.js --mode=production --progress --colors",
+    "build_dev": "webpack --mode=development --config ./config/webpack.base.config.js --progress --colors",
+    "build_dev_watch": "webpack --mode=development --watch --config ./config/webpack.base.config.js --progress --colors",
+    "build_pro": "webpack --mode=production --config ./config/webpack.pro.config.js --progress --colors",
     "dev": "run-p server --mode=development",
     "dev_proxy": "run-p server --mode=proxy",
-    "server": "webpack-dev-server --host 0.0.0.0 --config ./config/webpack.dev.config.js --progress --colors --profile"
+    "server": "webpack-dev-server --host 0.0.0.0 --mode=development --config ./config/webpack.dev.config.js --progress --colors --profile"
   },
   "dependencies": {
     "@babel/core": "^7.6.0",

@@ -19,10 +19,10 @@ let devServer = {
   contentBase: path.join(__dirname, "../dist")
 };
 
-if (process.env.NODE_ENV === "proxy") {
-  devServer = Object.assign(devServer, { proxy: { "/mock": proxyOptions } });
-}
-
-module.exports = merge(baseConfig, {
-  devServer
-});
+module.exports = (env, argv) => {
+  const _baseConfig = baseConfig(null, argv);
+  if (argv.mode == "proxy") {
+    devServer = Object.assign(devServer, { proxy: { "/mock": proxyOptions } });
+  }
+  return merge(_baseConfig, { devServer });
+};

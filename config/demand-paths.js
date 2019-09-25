@@ -30,7 +30,7 @@ module.exports = (
     for (let i = 0; i < demandPaths.length; i++) {
       const item = demandPaths[i];
       buildPaths.push(
-        getActualPath(`./src/views/${item}/**/index.${entryFilesSuffix}`)
+        getActualPath(`../src/views/${item}/**/index.${entryFilesSuffix}`)
       );
     }
     return buildPaths;

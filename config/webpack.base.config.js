@@ -48,6 +48,7 @@ let plugins = [
     filename: "index.html",
     showErrors: true,
     inject: true,
+    title: "桌面记",
     minify: {
       removeComments: true,
       collapseWhitespace: true,
@@ -77,7 +78,7 @@ module.exports = (env, argv) => {
       pathinfo: true,
       path: path.resolve(__dirname, "../dist"),
       filename: "js/[name].bundle.js",
-      publicPath: "/"
+      publicPath: "http://0.0.0.0:8888/"
     },
     // 模块解析
     resolve: {

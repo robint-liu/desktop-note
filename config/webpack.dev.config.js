@@ -12,10 +12,10 @@ let devServer = {
   hot: true, // Enables Hot Module Replacement (see devServer.hot) without page refresh as fallback in case of build failures.
   overlay: true, // Shows a full-screen overlay in the browser when there are compiler errors or warnings
   noInfo: true, // Tells dev-server to supress messages like the webpack bundle information. Errors and warnings will still be shown.
-  host: "127.0.0.1", //主机
-  port: 8088, // 端口
+  host: "0.0.0.0", //主机
+  port: 8888, // 端口
   inline: true, // 自动刷新
-  open: true,
+  // open: true,
   contentBase: path.join(__dirname, "../dist")
 };
 

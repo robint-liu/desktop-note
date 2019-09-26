@@ -1,31 +1,29 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Header />
+    <Banner />
+    <Menu />
     <router-view />
+    <Footer />
   </div>
 </template>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+<script>
+// Header组件
+import Header from "@components/header/index.vue";
+// Banner组件
+import Banner from "@components/banner/index.vue";
+// 左侧菜单组件
+import Menu from "@components/menu/index.vue";
+// footer组件
+import Footer from "@components/footer/index.vue";
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+export default {
+  components: {
+    Header,
+    Banner,
+    Menu,
+    Footer
+  }
+};
+</script>

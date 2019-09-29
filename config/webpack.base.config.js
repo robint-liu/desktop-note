@@ -72,7 +72,7 @@ module.exports = (env, argv) => {
       index: path.resolve(__dirname, "../src/main.js")
     },
     //调试工具
-    devtool: "eval-source-map",
+    devtool: "source-map",
     // 打包出口
     output: {
       pathinfo: true,
@@ -91,7 +91,8 @@ module.exports = (env, argv) => {
         "@mock": path.join(__dirname, "../src/mock"),
         "@util": path.join(__dirname, "../src/util"),
         "@src": path.join(__dirname, "../src"),
-        "@lib": path.join(__dirname, "../lib")
+        "@lib": path.join(__dirname, "../lib"),
+        "@root": path.join(__dirname, "../")
       }
     },
     // 外部扩展，需要时逐一使用

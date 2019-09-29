@@ -8,7 +8,7 @@
 
 项目版本：_0.0.1_
 
-项目技术栈：_electron + vue + vuex + vue-router + local 存储 + 文件操作等等_
+项目技术栈：_electron + vue + vue-antd + vuex + vue-router + local 存储 + 文件操作等等_
 
 项目描述：
 
@@ -27,6 +27,10 @@
             0919：定稿，发一版
             1007：开发代办事项和关于桌面记
             1031：全部功能开发完毕
+            
+注释：
+        
+            所有数据均存储在本地 indexedDB(非关系型数据库、兼容性好、支持离线操作)
 
 ## Project setup
 ```

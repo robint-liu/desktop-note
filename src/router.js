@@ -15,7 +15,7 @@ export default new Router({
     },
     {
       path: "/index",
-      name: "index",
+      name: "首页",
       component: Home
     },
     {
@@ -38,6 +38,8 @@ export default new Router({
     {
       path: "/about",
       name: "关于桌面记",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "@components/about"),
       children: [
         {
           path: "introduction",

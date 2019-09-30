@@ -51,5 +51,9 @@ export default {
       box-shadow: none;
     }
   }
+  .menu-right {
+    flex: 1 1;
+    position: relative;
+  }
 }
 </style>

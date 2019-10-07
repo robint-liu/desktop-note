@@ -27,6 +27,7 @@
     "babel-plugin-import": "^1.12.2",
     "core-js": "^2.6.9",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "moment-locales-webpack-plugin": "^1.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

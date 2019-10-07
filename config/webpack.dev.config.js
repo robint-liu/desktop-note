@@ -15,7 +15,7 @@ let devServer = {
   host: "0.0.0.0", //主机
   port: 8888, // 端口
   inline: true, // 自动刷新
-  // open: true,
+  open: true,
   contentBase: path.join(__dirname, "../dist")
 };
 

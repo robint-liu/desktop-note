@@ -6,7 +6,9 @@
       :src="avatar"
       :icon="avatar ? '' : 'user'"
     />
-    <div class="signature" v-show="hasSignature && !isMenuCollapsed">{{ signature }}</div>
+    <div class="signature" v-show="hasSignature && !isMenuCollapsed">
+      {{ signature }}
+    </div>
   </div>
 </template>
 
@@ -20,7 +22,7 @@
  *    3、当签名为空时，空时不予显示
  * */
 
-import commonAPI from "@common/api/common.js";
+import { userInfo } from "@common/api";
 
 export default {
   name: "index.vue",
@@ -55,7 +57,7 @@ export default {
     const {
       data: { avatar, signature },
       success
-    } = await commonAPI.getUserInfo();
+    } = await userInfo.getUserInfo();
     if (success) {
       this.avatar = avatar;
       this.signature = signature;

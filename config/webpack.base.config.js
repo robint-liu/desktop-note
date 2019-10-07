@@ -24,7 +24,7 @@ let plugins = [
   new VueLoaderPlugin(),
   // new webpack.optimize.CommonsChunkPlugin({
   //   name: ["vendor", "runtime"],
-  //   filename: "common.js",
+  //   filename: "index.js",
   //   minChunks: 3
   // }),
   new webpack.HotModuleReplacementPlugin(), //模块热替换，启用后会暴露接口module.hot

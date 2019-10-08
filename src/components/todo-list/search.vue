@@ -75,6 +75,12 @@ import { todoList as API } from "@common/api";
 
 export default {
   name: "search.vue",
+  props: {
+    handleSubmit: {
+      type: Function,
+      required: true
+    }
+  },
   data() {
     console.log("this", this);
     return {
@@ -105,7 +111,7 @@ export default {
     },
     onSubmit(e) {
       const event = e || window.event;
-      event.preventDefault();
+      event && event.preventDefault();
       // 函数防抖
       clearTimeout(this.dialogConfirmTimer);
       this.dialogConfirmTimer = setTimeout(() => {
@@ -116,12 +122,14 @@ export default {
               time: fieldsValue["time"].format("YYYY-MM-DD HH:mm:ss")
             };
             console.log("onSubmit", values);
-            const data = await API.getTodoList(values);
-            console.log("data", data);
+            this.handleSubmit(values);
           }
         });
       }, 100);
     }
+  },
+  mounted() {
+    this.onSubmit();
   }
 };
 </script>

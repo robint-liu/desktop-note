@@ -40,14 +40,13 @@
       <!-- 时间 -->
       <a-form-item label="时间">
         <a-date-picker
-          showTime
           v-decorator="[
             'time',
             {
-              initialValue: this.$moment(this.$moment(), 'YYYY-MM-DD HH:mm:ss')
+              initialValue: this.$moment(this.$moment(), 'YYYY-MM-DD')
             }
           ]"
-          format="YYYY-MM-DD HH:mm:ss"
+          format="YYYY-MM-DD"
           placeholder="Please Select"
           :disabledDate="disabledDate"
           :disabledTime="disabledDateTime"
@@ -75,18 +74,11 @@ import { todoList as API } from "@common/api";
 
 export default {
   name: "search.vue",
-  props: {
-    handleSubmit: {
-      type: Function,
-      required: true
-    }
-  },
+  props: {},
   data() {
-    console.log("this", this);
     return {
       form: this.$form.createForm(this),
       group: todoList.group,
-      order: undefined
     };
   },
   methods: {
@@ -109,9 +101,7 @@ export default {
         disabledSeconds: () => [55, 56]
       };
     },
-    onSubmit(e) {
-      const event = e || window.event;
-      event && event.preventDefault();
+    onSubmit() {
       // 函数防抖
       clearTimeout(this.dialogConfirmTimer);
       this.dialogConfirmTimer = setTimeout(() => {
@@ -119,10 +109,14 @@ export default {
           if (!err) {
             const values = {
               ...fieldsValue,
-              time: fieldsValue["time"].format("YYYY-MM-DD HH:mm:ss")
+              time: fieldsValue["time"].format("YYYY-MM-DD")
             };
             console.log("onSubmit", values);
-            this.handleSubmit(values);
+            this.$store.commit("updateTodoCondition", values);
+            const { data, success } = await API.getTodoList(values);
+            if (success) {
+              this.$store.commit("updateTodoList", data);
+            }
           }
         });
       }, 100);
@@ -134,4 +128,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="less">
+
+</style>

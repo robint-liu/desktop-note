@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     isMenuCollapsed: false,
     todoList: [],
-    todoListCondition: {}
+    todoListCondition: {},
+    itemModalVisible: false
   },
   mutations: {
     // 直接改变store.state, 无需返回值
@@ -16,6 +17,15 @@ export default new Vuex.Store({
     },
     updateTodoList(state, data) {
       state.todoList = data || [];
+    },
+    updateTodoCondition(state, data) {
+      state.todoListCondition = data || [];
+    },
+    itemModalVisible(state) {
+      state.itemModalVisible = !state.itemModalVisible;
+    },
+    deleteTodoList(state, index) {
+      state.todoList.splice(index, 1);
     }
   },
   actions: {}

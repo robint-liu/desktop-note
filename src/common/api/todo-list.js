@@ -2,6 +2,7 @@ import util from "@util";
 import { useHttpForApi } from "@root/local.config";
 
 function middle(params, callback) {
+  console.log("params：", params);
   return useHttpForApi
     ? util.axios(params)
     : typeof callback === "function" && callback(params);
@@ -16,8 +17,7 @@ export default {
         ...data
       }
     };
-    return middle(params, params => {
-      console.log("params：", params);
+    return middle(params, () => {
       return {
         success: true,
         errorMessage: null,
@@ -47,6 +47,23 @@ export default {
             status: "2"
           }
         ]
+      };
+    });
+  },
+  
+  /* 新增或编辑todoList */
+  addOrEditTodoList(data) {
+    const params = {
+      url: "/todoList/addOrEdit",
+      data: {
+        ...data
+      }
+    };
+    return middle(params, () => {
+      return {
+        success: true,
+        errorMessage: null,
+        data: null
       };
     });
   }

@@ -1,18 +1,19 @@
 import util from "@util";
+import apiCentralCenter from "./apiCentralCenter";
 import { useHttpForApi } from "@root/local.config";
 
-// todo: indexedDB操作, 暂mock数据
-function getUserInfo(params) {
-  console.log("params：", params);
-  return {
-    success: true,
-    errorMessage: null,
-    data: {
-      avatar:
-        "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-      signature: "我的世界我主宰！"
-    }
-  };
+const getUserInfo = async () => {
+  /*
+  * await apiCentralCenter.query(params)
+  * params:
+  * url: 接口
+  * data: 参数
+  * dbName: 数据库-表名
+  * */
+  return await apiCentralCenter.query({
+    data: { id: "1" },
+    dbName: "userInfo"
+  });
 }
 
 export default {

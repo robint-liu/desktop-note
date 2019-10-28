@@ -1,23 +1,30 @@
 import util from "@util";
+import apiCentralCenter from "./apiCentralCenter";
 import { useHttpForApi } from "@root/local.config";
 
 function middle(params, callback) {
-  console.log("params：", params);
   return useHttpForApi
     ? util.axios(params)
     : typeof callback === "function" && callback(params);
+}
+
+const getTodoList = async (params) => {
+  return await apiCentralCenter.query(params);
 }
 
 export default {
   /* 获取list */
   getTodoList(data) {
     const params = {
+      dbName: "todoList",
       url: "/todoList/list",
       data: {
-        ...data
+        ...data,
+        id: "1"
       }
     };
-    return middle(params, () => {
+    return useHttpForApi ? util.axios(params) : getTodoList(params);
+    /*return middle(params, () => {
       return {
         success: true,
         errorMessage: null,
@@ -48,12 +55,13 @@ export default {
           }
         ]
       };
-    });
+    });*/
   },
-  
+
   /* 新增或编辑todoList */
   addOrEditTodoList(data) {
     const params = {
+      dbName: "todoList",
       url: "/todoList/addOrEdit",
       data: {
         ...data

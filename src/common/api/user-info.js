@@ -14,7 +14,7 @@ const getUserInfo = async () => {
     data: { id: "1" },
     dbName: "userInfo"
   });
-}
+};
 
 export default {
   /* 获取用户信息 */

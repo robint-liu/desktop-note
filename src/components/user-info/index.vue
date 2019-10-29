@@ -55,9 +55,10 @@ export default {
   async created() {
     // 更新个人信息
     const {
-      data: { avatar, signature },
+      data=[],
       success
     } = await userInfo.getUserInfo();
+    const { avatar, signature } = data[0];
     if (success) {
       this.avatar = avatar;
       this.signature = signature;

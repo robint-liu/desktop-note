@@ -1,16 +1,9 @@
 import util from "@util";
-import apiCentralCenter from "./apiCentralCenter";
+import apiControl from "./apiControler";
 import { useHttpForApi } from "@root/local.config";
 
-function middle(params, callback) {
-  return useHttpForApi
-    ? util.axios(params)
-    : typeof callback === "function" && callback(params);
-}
-
-const getTodoList = async (params) => {
-  return await apiCentralCenter.query(params);
-}
+const todoList = async params =>
+  useHttpForApi ? util.axios(params) : await apiControl(params);
 
 export default {
   /* 获取list */
@@ -18,29 +11,21 @@ export default {
     const params = {
       dbName: "todoList",
       url: "/todoList/list",
-      data: {
-        // ...data,
-        id: "1"
-      }
+      data
     };
-    return useHttpForApi ? util.axios(params) : getTodoList(params);
+    return todoList(params);
   },
 
   /* 新增或编辑todoList */
   addOrEditTodoList(data) {
     const params = {
       dbName: "todoList",
+      type: data.id ? "update" : "add",
       url: "/todoList/addOrEdit",
       data: {
         ...data
       }
     };
-    return middle(params, () => {
-      return {
-        success: true,
-        errorMessage: null,
-        data: null
-      };
-    });
+    return todoList(params);
   }
 };

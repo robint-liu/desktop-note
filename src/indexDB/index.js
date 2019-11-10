@@ -42,19 +42,19 @@ class IndexDB {
     });
     db.version(1).stores(objectStore);
     // 暂时add操作
-    // db.userInfo.add({
-    //   id: "1",
-    //   name: "比诺",
-    //   signature: "我的世界我主宰！",
-    //   avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-    // });
-    // db.todoList.add({
-    //   id: "1",
-    //   group: "0",
-    //   order: 1,
-    //   time: "2019-10-29",
-    //   text: "test"
-    // });
+    /*db.userInfo.add({
+      id: "1",
+      name: "比诺",
+      signature: "我的世界我主宰！",
+      avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+    });
+    db.todoList.add({
+      id: "1",
+      group: "0",
+      order: 1,
+      time: "2019-11-11",
+      text: "test"
+    });*/
   }
 }
 export default new IndexDB();

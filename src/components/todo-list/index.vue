@@ -1,16 +1,15 @@
 <template>
   <div class="todo-list-wrap page-common">
-    <Search />
+    <Search :search="query" />
     <br />
-    <List />
-    <Update />
+    <List :search="query" />
   </div>
 </template>
 
 <script>
 import Search from "./search";
 import List from "./list";
-import Update from "./itemModal";
+import API from "@common/api";
 import "@common/style/common.less";
 
 export default {
@@ -20,10 +19,19 @@ export default {
   },
   components: {
     Search,
-    List,
-    Update
+    List
   },
-  methods: {}
+  methods: {
+    async query() {
+      console.log("search_params", this.$store.state.todoListCondition);
+      const { data, success } = await API.getTodoList(
+        this.$store.state.todoListCondition
+      );
+      if (success) {
+        this.$store.commit("updateTodoList", data);
+      }
+    }
+  }
 };
 </script>
 

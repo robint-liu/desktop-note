@@ -22,7 +22,7 @@
  *    3、当签名为空时，空时不予显示
  * */
 
-import { userInfo } from "@common/api";
+import API from "@common/api";
 
 export default {
   name: "index.vue",
@@ -54,10 +54,7 @@ export default {
   },
   async created() {
     // 更新个人信息
-    const {
-      data=[],
-      success
-    } = await userInfo.getUserInfo();
+    const { data = [], success } = await API.getUserInfo();
     const { avatar, signature } = data[0];
     if (success) {
       this.avatar = avatar;

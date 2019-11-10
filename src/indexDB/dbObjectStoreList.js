@@ -50,24 +50,8 @@ export default [
         key: "status"
       },
       {
-        name: "[group+order+time]",
-        syntax: "compound",
-        related: ["group", "order", "time"]
-      },
-      {
-        name: "[group+order+text+time]",
-        syntax: "compound",
-        related: ["group", "order", "time", "text"]
-      },
-      {
-        name: "[group+order+text+time+id]",
-        syntax: "compound",
-        related: ["group", "order", "time", "text", "id"]
-      },
-      {
-        name: "[group+order+text+time+status]",
-        syntax: "compound",
-        related: ["group", "order", "time", "text", "status"]
+        name: "重复",
+        key: "repeat"
       }
     ]
   }

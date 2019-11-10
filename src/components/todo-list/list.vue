@@ -29,39 +29,43 @@
         >
         <a-divider type="vertical" />
 
-        <a-popconfirm title="确定删除吗？" @confirm="() => handleDelete(record, index)" cancelText="否" okText="是">
-          <a-button
-            type="link"
-            class="link-button"
-            >删除</a-button
-          >
+        <a-popconfirm
+          title="确定删除吗？"
+          @confirm="() => handleDelete(record, index)"
+          cancelText="否"
+          okText="是"
+        >
+          <a-button type="link" class="link-button">删除</a-button>
         </a-popconfirm>
       </span>
     </a-table>
-    <item-modal :initialData="initialData" />
+    <my-modal :initialData="initialData" :search="search" />
   </div>
 </template>
 
 <script>
 import columns from "./columns";
-import ItemModal from "./itemModal";
-import { todoList as API } from "@common/api";
+import Modal from "./modal";
 
 export default {
   name: "list.vue",
   data() {
     return {
-      pagination: {
-      },
+      pagination: {},
       loading: false,
       columns,
       initialData: {}
     };
   },
   components: {
-    "item-modal": ItemModal
+    "my-modal": Modal
   },
-  props: {},
+  props: {
+    search: {
+      type: Function,
+      required: true
+    }
+  },
   computed: {
     // eslint-disable-next-line vue/no-dupe-keys
     data: function() {
@@ -80,33 +84,24 @@ export default {
         sortOrder: sorter.order,
         ...filters
       };
-      console.log("handleTableChange", params);
-      this.handleSubmit(params);
-    },
-    async handleSubmit(params) {
-      const { data, success } = await API.getTodoList(params);
-      if (success) {
-        this.$store.commit("updateTodoList", data);
-      }
+      this.$store.commit("updateTodoCondition", params);
+      this.search();
     },
     handleAdd(e) {
       const event = e || window.event;
       event.stopPropagation();
-      this.$store.commit("itemModalVisible");
+      this.$store.commit("todoListModalVisible");
       this.initialData = {};
     },
     handleEdit(record) {
-      console.log("handleEdit", this);
-      this.$store.commit("itemModalVisible");
+      this.$store.commit("todoListModalVisible");
       this.initialData = record;
     },
     handleCopy(record) {
-      console.log("handleCopy");
-      this.$store.commit("itemModalVisible");
+      this.$store.commit("todoListModalVisible");
       this.initialData = Object.assign({}, record, { isCopy: true });
     },
     handleDelete(record, index) {
-      console.log("handleDelete");
       this.$store.commit("deleteTodoList", index);
     }
   }

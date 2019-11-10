@@ -9,4 +9,7 @@
 import userInfo from "./user-info";
 import todoList from "./todo-list";
 
-export { userInfo, todoList };
+export default {
+  ...userInfo,
+  ...todoList
+};

@@ -70,15 +70,20 @@
 
 <script>
 import { todoList } from "@common/constant";
-import { todoList as API } from "@common/api";
 
 export default {
   name: "search.vue",
-  props: {},
+  props: {
+    // search: {
+    //   type: Function,
+    //   required: true
+    // }
+    search: Function
+  },
   data() {
     return {
       form: this.$form.createForm(this),
-      group: todoList.group,
+      group: todoList.group
     };
   },
   methods: {
@@ -111,12 +116,8 @@ export default {
               ...fieldsValue,
               time: fieldsValue["time"].format("YYYY-MM-DD")
             };
-            console.log("onSubmit", values);
             this.$store.commit("updateTodoCondition", values);
-            const { data, success } = await API.getTodoList(values);
-            if (success) {
-              this.$store.commit("updateTodoList", data);
-            }
+            this.search();
           }
         });
       }, 100);
@@ -128,6 +129,4 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
-
-</style>
+<style scoped lang="less"></style>

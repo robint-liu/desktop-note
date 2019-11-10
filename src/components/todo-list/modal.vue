@@ -99,7 +99,7 @@
 
 <script>
 import { todoList } from "@common/constant";
-import { todoList as API } from "@common/api";
+import API from "@common/api";
 
 export default {
   name: "update.vue",
@@ -118,11 +118,12 @@ export default {
     initialData: {
       type: Object,
       default: () => ({})
-    }
+    },
+    search: Function
   },
   computed: {
     visible: function() {
-      return this.$store.state.itemModalVisible;
+      return this.$store.state.todoListModalVisible;
     }
   },
   methods: {
@@ -144,19 +145,19 @@ export default {
         this.form.validateFields(async (err, fieldsValue) => {
           if (!err) {
             this.confirmLoading = true;
-            this.$store.commit("updateTodoCondition", values);
             const { id, isCopy } = this.initialData;
             const values = {
               ...fieldsValue,
               time: fieldsValue["time"].format("YYYY-MM-DD"),
               id: isCopy ? "" : id
             };
-            console.log("handleOk", values);
+            this.$store.commit("updateTodoCondition", values);
             const { success } = await API.addOrEditTodoList(values);
             if (success) {
-              this.$store.commit("itemModalVisible");
+              this.$store.commit("todoListModalVisible");
               this.confirmLoading = false;
               this.form.resetFields();
+              this.search();
               this.$message.success("提交成功", 2);
             }
           }
@@ -164,7 +165,7 @@ export default {
       }, 100);
     },
     handleCancel() {
-      this.$store.commit("itemModalVisible");
+      this.$store.commit("todoListModalVisible");
       this.form.resetFields();
     }
   }

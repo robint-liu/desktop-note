@@ -1,16 +1,16 @@
 import util from "@util";
-import apiCentralCenter from "./apiCentralCenter";
+import apiControl from "./apiControler";
 import { useHttpForApi } from "@root/local.config";
 
 const getUserInfo = async () => {
   /*
-  * await apiCentralCenter.query(params)
+  * await apiControl(params)
   * params:
   * url: 接口
   * data: 参数
   * dbName: 数据库-表名
   * */
-  return await apiCentralCenter.query({
+  return await apiControl({
     data: { id: "1" },
     dbName: "userInfo"
   });

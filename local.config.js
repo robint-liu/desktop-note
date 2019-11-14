@@ -9,5 +9,6 @@ module.exports = {
     "yun-yan/seller-processing-center",
     "yun-yan/order-ability-details"
   ],
-  entryFilesSuffix: "vue"
+  entryFilesSuffix: "vue",
+  useHttpForApi: false,
 };

@@ -1,13 +1,14 @@
 {
-  "presets": ["@babel/preset-env"],
+  "presets": ["@vue/app", "@babel/preset-env"],
   "plugins": [
     "react-hot-loader/babel",
-    [
-      "import",
-      {
-        "libraryName": "antd",
-        "style": true
-      }
-    ]
+        [
+          "import",
+          {
+            "libraryName": "ant-design-vue",
+            "libraryDirectory": "es",
+            "style": true
+          }
+        ]
   ]
 }

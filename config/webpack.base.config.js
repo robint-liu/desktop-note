@@ -24,7 +24,7 @@ let plugins = [
   new VueLoaderPlugin(),
   // new webpack.optimize.CommonsChunkPlugin({
   //   name: ["vendor", "runtime"],
-  //   filename: "common.js",
+  //   filename: "index.js",
   //   minChunks: 3
   // }),
   new webpack.HotModuleReplacementPlugin(), //模块热替换，启用后会暴露接口module.hot
@@ -48,6 +48,7 @@ let plugins = [
     filename: "index.html",
     showErrors: true,
     inject: true,
+    title: "桌面记",
     minify: {
       removeComments: true,
       collapseWhitespace: true,
@@ -71,13 +72,13 @@ module.exports = (env, argv) => {
       index: path.resolve(__dirname, "../src/main.js")
     },
     //调试工具
-    devtool: "eval-source-map",
+    devtool: "source-map",
     // 打包出口
     output: {
       pathinfo: true,
       path: path.resolve(__dirname, "../dist"),
       filename: "js/[name].bundle.js",
-      publicPath: "/"
+      publicPath: "http://0.0.0.0:8888/"
     },
     // 模块解析
     resolve: {
@@ -90,7 +91,8 @@ module.exports = (env, argv) => {
         "@mock": path.join(__dirname, "../src/mock"),
         "@util": path.join(__dirname, "../src/util"),
         "@src": path.join(__dirname, "../src"),
-        "@lib": path.join(__dirname, "../lib")
+        "@lib": path.join(__dirname, "../lib"),
+        "@root": path.join(__dirname, "../")
       }
     },
     // 外部扩展，需要时逐一使用

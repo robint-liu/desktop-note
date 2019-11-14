@@ -4,7 +4,6 @@
   "private": true,
   "main": "./electron/index.js",
   "scripts": {
-    "precommit": "webpack -h",
     "help": "webpack -h",
     "clear": "rm -rf dist",
     "start": "electron .",

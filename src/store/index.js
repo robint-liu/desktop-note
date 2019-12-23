@@ -1,14 +1,20 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import memo from "./memo";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const homeStore = {
   state: {
     isMenuCollapsed: false,
+    // 待办事项
     todoList: [],
     todoListCondition: {},
-    todoListModalVisible: false
+    todoListModalVisible: false,
+    // 我的备忘
+    memoList: [],
+    memoCondition: {},
+    memoModalVisible: false
   },
   mutations: {
     // 直接改变store.state, 无需返回值
@@ -26,7 +32,12 @@ export default new Vuex.Store({
     },
     deleteTodoList(state, index) {
       state.todoList.splice(index, 1);
+    },
+    updateMemoCondition(state, data) {
+      state.todoListCondition = data || [];
     }
   },
   actions: {}
-});
+};
+
+export default new Vuex.Store(Object.assign({}, homeStore, memo));

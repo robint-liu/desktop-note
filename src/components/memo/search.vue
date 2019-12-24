@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-list-search">
+  <div class="memo-list-search">
     <a-form :form="form" layout="inline">
       <!-- 分组 -->
       <a-form-item label="分组">
@@ -75,7 +75,7 @@ export default {
               ...fieldsValue,
               time: fieldsValue["time"].format("YYYY-MM-DD")
             };
-            this.$store.commit("updateTodoCondition", values);
+            this.$store.commit("updateMemoCondition", values);
             this.search();
           }
         });

@@ -8,8 +8,12 @@
 
 import userInfo from "./user-info";
 import todoList from "./todo-list";
+import memo from "./memo";
+import wallpaper from "./wallpaper.js";
 
 export default {
   ...userInfo,
-  ...todoList
+  ...todoList,
+  ...memo,
+  ...wallpaper
 };

@@ -69,21 +69,17 @@
 </template>
 
 <script>
-import { todoList } from "@common/constant";
+import { group } from "@common/constant";
 
 export default {
   name: "search.vue",
   props: {
-    // search: {
-    //   type: Function,
-    //   required: true
-    // }
     search: Function
   },
   data() {
     return {
       form: this.$form.createForm(this),
-      group: todoList.group
+      group: group
     };
   },
   methods: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-list-table">
+  <div class="memo-list-table">
     <div class="button-wrap">
       <a-button type="primary" @click="handleAdd">
         <a-icon type="plus" />新增
@@ -67,12 +67,11 @@ export default {
     }
   },
   computed: {
-    // eslint-disable-next-line vue/no-dupe-keys
     data: function() {
-      return this.$store.state.todoList;
+      return this.$store.state.memoList;
     },
     condition: function() {
-      return this.$store.state.todoListCondition;
+      return this.$store.state.memoCondition;
     }
   },
   methods: {
@@ -84,32 +83,32 @@ export default {
         sortOrder: sorter.order,
         ...filters
       };
-      this.$store.commit("updateTodoCondition", params);
+      this.$store.commit("memoCondition", params);
       this.search();
     },
     handleAdd(e) {
       const event = e || window.event;
       event.stopPropagation();
-      this.$store.commit("todoListModalVisible");
+      this.$store.commit("memoModalVisible");
       this.initialData = {};
     },
     handleEdit(record) {
-      this.$store.commit("todoListModalVisible");
+      this.$store.commit("memoModalVisible");
       this.initialData = record;
     },
     handleCopy(record) {
-      this.$store.commit("todoListModalVisible");
+      this.$store.commit("memoModalVisible");
       this.initialData = Object.assign({}, record, { isCopy: true });
     },
     handleDelete(record, index) {
-      this.$store.commit("deleteTodoList", index);
+      this.$store.commit("deleteMemoList", index);
     }
   }
 };
 </script>
 
 <style scoped lang="less">
-.todo-list-table {
+.memo-list-table {
   .button-wrap {
     margin-bottom: 10px;
     text-align: right;

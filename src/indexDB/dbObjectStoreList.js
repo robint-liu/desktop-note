@@ -54,5 +54,28 @@ export default [
         key: "repeat"
       }
     ]
+  },
+  {
+    name: "我的备忘",
+    key: "memoList",
+    indexList: [
+      {
+        name: "ID",
+        key: "id",
+        syntax: "auto-incremented"
+      },
+      {
+        name: "分组",
+        key: "group"
+      },
+      {
+        name: "时间",
+        key: "time"
+      },
+      {
+        name: "正文",
+        key: "text"
+      }
+    ]
   }
 ];

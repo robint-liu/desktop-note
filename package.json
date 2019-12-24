@@ -23,9 +23,12 @@
     "@babel/preset-env": "^7.6.0",
     "@babel/runtime-corejs2": "^7.6.2",
     "ant-design-vue": "^1.4.0-beta.0",
+    "axios": "^0.19.0",
     "babel-loader": "^8.0.0-beta.0",
     "babel-plugin-import": "^1.12.2",
     "core-js": "^2.6.9",
+    "dexie": "^2.0.4",
+    "jsonp": "^0.2.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "moment-locales-webpack-plugin": "^1.1.0",
@@ -34,9 +37,7 @@
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1",
-    "webpack-merge": "^4.2.2",
-    "axios": "^0.19.0",
-    "dexie": "^2.0.4"
+    "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.6.2",

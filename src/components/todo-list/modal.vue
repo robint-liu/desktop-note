@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import { todoList } from "@common/constant";
+import { group } from "@common/constant";
 import API from "@common/api";
 
 export default {
@@ -106,7 +106,7 @@ export default {
   data() {
     return {
       form: this.$form.createForm(this),
-      group: todoList.group,
+      group: group,
       confirmLoading: false,
       formItemLayout: {
         labelCol: { span: 3 },

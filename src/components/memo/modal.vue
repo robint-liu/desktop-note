@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    title="待办事项"
+    title="我的备忘"
     :visible="visible"
     @ok="handleOk"
     :confirmLoading="confirmLoading"
@@ -26,7 +26,6 @@
           format="YYYY-MM-DD"
           placeholder="Please Select"
           :disabledDate="disabledDate"
-          :ok="() => {}"
         />
       </a-form-item>
 
@@ -49,26 +48,6 @@
         </a-select>
       </a-form-item>
 
-      <!-- 优先级 -->
-      <a-form-item
-        v-bind="formItemLayout"
-        label="优先级"
-        extra="不小于1的正整数，值越大，优先级越高"
-      >
-        <a-input-number
-          :min="1"
-          style="width: 100%"
-          v-decorator="[
-            'order',
-            {
-              rules: [{ required: true, message: '请输入优先级' }],
-              initialValue: initialData.order
-            }
-          ]"
-          placeholder="Please Select"
-        />
-      </a-form-item>
-
       <!-- 正文 -->
       <a-form-item v-bind="formItemLayout" label="正文">
         <a-textarea
@@ -83,22 +62,12 @@
           placeholder="Please input"
         />
       </a-form-item>
-
-      <!-- 重复提醒 -->
-      <a-form-item v-bind="formItemLayout" label="重复">
-        <a-checkbox
-          v-decorator="[
-            'repeat',
-            { valuePropName: 'checked', initialValue: initialData.repeat }
-          ]"
-        />
-      </a-form-item>
     </a-form>
   </a-modal>
 </template>
 
 <script>
-import { todoList } from "@common/constant";
+import { group } from "@common/constant";
 import API from "@common/api";
 
 export default {
@@ -106,7 +75,7 @@ export default {
   data() {
     return {
       form: this.$form.createForm(this),
-      group: todoList.group,
+      group: group,
       confirmLoading: false,
       formItemLayout: {
         labelCol: { span: 3 },
@@ -123,7 +92,7 @@ export default {
   },
   computed: {
     visible: function() {
-      return this.$store.state.todoListModalVisible;
+      return this.$store.state.memoModalVisible;
     }
   },
   methods: {
@@ -136,7 +105,7 @@ export default {
     },
     disabledDate(current) {
       // Can not select days before today and today
-      return current && current < this.$moment().endOf("day");
+      return current < this.$moment().endOf("day");
     },
     async handleOk() {
       // 函数防抖
@@ -149,12 +118,12 @@ export default {
             const values = {
               ...fieldsValue,
               time: fieldsValue["time"].format("YYYY-MM-DD"),
-              id: isCopy ? "" : id
+              id: isCopy ? undefined : id
             };
-            this.$store.commit("updateTodoCondition", values);
-            const { success } = await API.addOrEditTodoList(values);
+            this.$store.commit("updateMemoCondition", values);
+            const { success } = await API.addOrEditMemoList(values);
             if (success) {
-              this.$store.commit("todoListModalVisible");
+              this.$store.commit("memoModalVisible");
               this.confirmLoading = false;
               this.form.resetFields();
               this.search();
@@ -165,7 +134,7 @@ export default {
       }, 100);
     },
     handleCancel() {
-      this.$store.commit("todoListModalVisible");
+      this.$store.commit("memoModalVisible");
       this.form.resetFields();
     }
   }

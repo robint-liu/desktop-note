@@ -3,9 +3,9 @@ import { Modal } from "ant-design-vue/es";
 
 export default {
   // 二次封装接口
-  axios(params) {
+  async axios(params) {
     // 拿到参数直接进行接口请求
-    return _axios(params)
+    return await _axios(params)
       .then(res => res)
       .catch(error => {
         Modal.error({
@@ -13,5 +13,5 @@ export default {
           content: error.Msg || error.errorMsg
         });
       });
-  },
-}
+  }
+};

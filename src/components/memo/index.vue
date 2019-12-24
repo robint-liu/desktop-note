@@ -23,12 +23,12 @@ export default {
   },
   methods: {
     async query() {
-      console.log("search_params", this.$store.state.todoListCondition);
-      const { data, success } = await API.getTodoList(
-        this.$store.state.todoListCondition
+      console.log("search_params", this.$store.state.memoCondition);
+      const { data, success } = await API.getMemoList(
+        this.$store.state.memoCondition
       );
       if (success) {
-        this.$store.commit("updateTodoList", data);
+        this.$store.commit("updateMemoList", data);
       }
     }
   }

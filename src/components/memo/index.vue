@@ -1,5 +1,5 @@
 <template>
-  <div class="my-memo-wrap page-common">
+  <div class="my-memo-wrap page-common" style="height: calc(100vh - 40px)">
     <Search :search="query" />
     <br />
     <List :search="query" />

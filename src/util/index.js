@@ -4,4 +4,4 @@ import util from "./util";
 export default {
   ...http,
   ...util
-}
+};

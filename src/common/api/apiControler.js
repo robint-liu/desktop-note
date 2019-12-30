@@ -25,21 +25,25 @@ class HandleIndexDb {
       type
     } = params || {};
     const desktopNote_DB = window.desktopNote_DB[dbName];
-    const tranRes = await window.desktopNote_DB.transaction("rw", desktopNote_DB, async () => {
-      switch (type) {
-        case "add":
-          return await desktopNote_DB.add(data);
-        case "delete":
-          return await desktopNote_DB.delete(id);
-        case "update":
-          return await desktopNote_DB
-            .where(":id")
-            .equals(id)
-            .modify(rest);
-        default:
-          return await desktopNote_DB.where(data).toArray();
+    const tranRes = await window.desktopNote_DB.transaction(
+      "rw",
+      desktopNote_DB,
+      async () => {
+        switch (type) {
+          case "add":
+            return await desktopNote_DB.add(data);
+          case "delete":
+            return await desktopNote_DB.delete(id);
+          case "update":
+            return await desktopNote_DB
+              .where(":id")
+              .equals(id)
+              .modify(rest);
+          default:
+            return await desktopNote_DB.where(data).toArray();
+        }
       }
-    });
+    );
     return this.formatData(tranRes);
   }
 }

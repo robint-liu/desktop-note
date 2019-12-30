@@ -1,5 +1,5 @@
 <template>
-  <div class="contact-wrap">
+  <div class="contact-wrap page-common" style="height: calc(100vh - 40px)">
     <Banner />
     <br />
     <main>
@@ -79,6 +79,8 @@
 
 <script>
 import Banner from "@components/banner";
+import "@common/style/common.less";
+
 export default {
   name: "contact.vue",
   components: {
@@ -90,6 +92,7 @@ export default {
 <style lang="less" scoped>
 @import "../../common/style/variable";
 .contact-wrap {
+  padding: 0;
   main {
     padding: 20px;
     h2 {

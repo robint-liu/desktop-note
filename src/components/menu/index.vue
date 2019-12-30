@@ -13,7 +13,8 @@
       <my-menu :isMenuCollapsed="isMenuCollapsed" />
     </div>
     <div class="menu-right">
-      <slot name="menuRight"></slot>
+      <slot name="menuRight" />
+      <Footer />
     </div>
   </div>
 </template>
@@ -21,6 +22,8 @@
 <script>
 import userInfo from "@components/user-info";
 import myMenu from "./menu";
+// footer组件
+import Footer from "@components/footer/index.vue";
 
 export default {
   computed: {
@@ -35,7 +38,8 @@ export default {
   },
   components: {
     "user-info": userInfo,
-    "my-menu": myMenu
+    "my-menu": myMenu,
+    Footer
   }
 };
 </script>
@@ -44,6 +48,7 @@ export default {
 .menu-wrap {
   display: flex;
   .menu-left {
+    padding-top: 15px;
     .menuCollapsed {
       margin: 5px 5%;
       width: 90%;
@@ -53,7 +58,9 @@ export default {
   }
   .menu-right {
     flex: 1 1;
+    height: calc(100vh);
     position: relative;
+    border-left: 1px solid rgb(232, 232, 232);
   }
 }
 </style>

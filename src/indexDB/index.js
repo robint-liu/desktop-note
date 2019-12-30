@@ -42,7 +42,7 @@ class IndexDB {
     });
     db.version(1).stores(objectStore);
     // start
-    /*db.userInfo.add({
+    db.userInfo.add({
       id: "1",
       name: "比诺",
       signature: "我的世界我主宰！",
@@ -60,7 +60,7 @@ class IndexDB {
       group: "0",
       time: "2019-12-24",
       text: "test"
-    });*/
+    });
     // end
   }
 }

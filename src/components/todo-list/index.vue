@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-list-wrap page-common">
+  <div class="todo-list-wrap page-common" style="height: calc(100vh - 40px)">
     <Search :search="query" />
     <br />
     <List :search="query" />

@@ -1,18 +1,18 @@
 module.exports = {
   root: true,
   extends: ["plugin:vue/essential", "@vue/prettier"],
-  "parserOptions": {
+  parserOptions: {
     parser: "babel-eslint",
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true,
-      "globalReturn": true,
-      "impliedStrict": true
+    ecmaVersion: 6,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+      globalReturn: true,
+      impliedStrict: true
     }
   },
-  "rules": {
-    "indent": ["warn", 2],
+  rules: {
+    indent: ["warn", 2],
     "accessor-pairs": 2,
     "arrow-body-style": 2,
     "arrow-spacing": 2,
@@ -26,11 +26,11 @@ module.exports = {
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
   },
-  "env": {
-    "browser": true,
-    "node": true,
-    "commonjs": false,
-    "es6": true,
-    "jquery": false
+  env: {
+    browser: true,
+    node: true,
+    commonjs: false,
+    es6: true,
+    jquery: false
   }
 };

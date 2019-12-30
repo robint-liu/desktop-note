@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div class="my-menu">
     <a-menu
       mode="inline"
       theme="light"
+      class="ul-menu"
+      style="{border-right: 0}"
       @click="clickMenu"
       :defaultOpenKeys="['about']"
       :defaultSelectedKeys="['index']"
@@ -62,3 +64,11 @@ export default {
   }
 };
 </script>
+
+<style lang="less" scoped>
+.my-menu {
+  ul.ul-menu {
+    border: 0;
+  }
+}
+</style>

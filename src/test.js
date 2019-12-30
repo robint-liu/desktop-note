@@ -1,4 +1,2 @@
-const abc = (a) => {
-  return a * a
-}
+const abc = a => a * a;
 abc(2);

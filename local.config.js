@@ -10,5 +10,5 @@ module.exports = {
     "yun-yan/order-ability-details"
   ],
   entryFilesSuffix: "vue",
-  useHttpForApi: false,
+  useHttpForApi: false
 };

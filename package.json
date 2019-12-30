@@ -6,13 +6,25 @@
   "scripts": {
     "help": "webpack -h",
     "clear": "rm -rf dist",
+
+    "server": "webpack-dev-server --host 0.0.0.0  --config ./config/webpack.dev.config.js --progress --colors --profile",
+    "dev": "cross-env NODE_ENV=development yarn server",
+    "dev_proxy": "cross-env NODE_ENV=proxy yarn server",
+    "dev_pro": "cross-env NODE_ENV=production yarn server",
+
+    "build_dev": "npm i && cross-env NODE_ENV=development webpack --config ./config/webpack.base.config.js --progress --colors",
+    "build_dev_watch": "npm i && cross-env NODE_ENV=development webpack --watch --config ./config/webpack.base.config.js --progress --colors",
+    "build_pro": "npm i && cross-env NODE_ENV=production && webpack --config ./config/webpack.pro.config.js --progress --colors",
+
     "start": "electron .",
-    "dev": "run-p server --mode=development",
-    "dev_proxy": "run-p server --mode=proxy",
-    "server": "webpack-dev-server --host 0.0.0.0 --mode=development --config ./config/webpack.dev.config.js --progress --colors --profile",
-    "build_dev": "webpack --mode=development --config ./config/webpack.base.config.js --progress --colors",
-    "build_dev_watch": "webpack --mode=development --watch --config ./config/webpack.base.config.js --progress --colors",
-    "build_pro": "webpack --mode=production --config ./config/webpack.pro.config.js --progress --colors",
+    "start_dev": "cross-env NODE_ENV=development run-p dev start",
+    "start_proxy": "cross-env NODE_ENV=proxy run-p dev_proxy start",
+    "start_pro": "cross-env NODE_ENV=production run-p dev_pro start",
+
+    "mac": "electron-builder --mac --x64",
+    "win": "electron-builder --win --x64 --ia32",
+    "builder": "run-p mac win",
+
     "lint": "vue-cli-service lint",
     "serve": "vue-cli-service serve",
     "test:e2e": "vue-cli-service test:e2e"
@@ -40,6 +52,8 @@
     "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
+    "electron": "^6.0.10",
+    "electron-builder": "^21.2.0",
     "@babel/plugin-transform-runtime": "^7.6.2",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
@@ -48,12 +62,11 @@
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-service": "^3.11.0",
     "@vue/eslint-config-prettier": "^5.0.0",
-    "babel-eslint": "^10.0.1",
+    "babel-eslint": "8.0.1",
     "commitizen": "^4.0.3",
     "copy-webpack-plugin": "^5.0.4",
     "cross-env": "^6.0.0",
     "css-loader": "^3.2.0",
-    "electron": "^6.0.10",
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-vue": "^5.0.0",
@@ -65,7 +78,7 @@
     "less": "^2.7.3",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "4.12.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.18.2",
     "react-hot-loader": "^4.12.13",
@@ -82,5 +95,53 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "prettier": {
+    "eslintIntegration": true
+  },
+  "build": {
+    "asar": true,
+    "productName": "桌面记",
+    "directories": {
+      "output": "app"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "category": "photo",
+      "icon": "./src/assets/favicon.ico",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "./src/assets/favicon.ico"
+    },
+    "nsis": {
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": true,
+      "oneClick": false
+    },
+    "extraFiles": [
+      "dll"
+    ]
   }
 }

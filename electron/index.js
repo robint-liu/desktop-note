@@ -5,6 +5,9 @@ const url = require("url");
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
 
+// 用来监听是否为开发环境
+const isDev = process.env.NODE_ENV === "development";
+
 let win;
 
 function createWindow() {
@@ -16,18 +19,26 @@ function createWindow() {
     }
   });
 
-  const indexPath = url.format({
-    protocol: "http:",
-    host: "0.0.0.0:8888",
-    slashes: true
-  });
+  let indexPath;
+  if (isDev) {
+    indexPath = url.format({
+      protocol: "http:",
+      host: "0.0.0.0:8888",
+      slashes: true
+    });
+    // 打开开发者工具
+    win.webContents.openDevTools();
+  } else {
+    indexPath = url.format({
+      protocol: "file:",
+      pathname: path.join(__dirname, "../dist/index.html"),
+      slashes: true
+    });
+  }
 
   // 加载index.html文件
   // win.loadFile('dist/index.html');
   win.loadURL(indexPath);
-
-  // 打开开发者工具
-  win.webContents.openDevTools();
 
   // 当 window 被关闭，这个事件会被触发。
   win.on("closed", () => {

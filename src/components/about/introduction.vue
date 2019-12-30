@@ -1,5 +1,5 @@
 <template>
-  <div class="introduction-wrap">
+  <div class="introduction-wrap page-common" style="height: calc(100vh - 40px)">
     <Banner />
     <br />
     <main>
@@ -43,6 +43,8 @@
 
 <script>
 import Banner from "@components/banner";
+import "@common/style/common.less";
+
 export default {
   name: "introduction.vue",
   components: {
@@ -52,8 +54,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "../../common/style/variable";
-.introduction-wrap{
+@import "~@common/style/variable";
+.introduction-wrap {
+  padding: 0;
   main {
     padding: 20px;
     h2 {

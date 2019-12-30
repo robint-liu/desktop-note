@@ -6,7 +6,6 @@
         <router-view />
       </template>
     </Menu>
-    <Footer />
   </div>
 </template>
 
@@ -15,14 +14,11 @@
 import Header from "@components/header/index.vue";
 // 左侧菜单组件
 import Menu from "@components/menu/index.vue";
-// footer组件
-import Footer from "@components/footer/index.vue";
 
 export default {
   components: {
     Header,
-    Menu,
-    Footer
+    Menu
   }
 };
 </script>

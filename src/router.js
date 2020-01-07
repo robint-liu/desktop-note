@@ -4,17 +4,13 @@ import Home from "@components/home";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
-      name: "首页",
-      component: Home
-    },
-    {
-      path: "/index",
+      alias: "/index",
       name: "首页",
       component: Home
     },
@@ -67,3 +63,15 @@ export default new Router({
     }
   ]
 });
+
+// 设置全局前置守卫：检验cookie是否登录，然后重定向到login
+router.beforeEach((to, from, next) => {
+  const isLogin = true;
+  if (isLogin) {
+    next(to);
+  } else {
+    next("/login");
+  }
+});
+
+export default router;

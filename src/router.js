@@ -68,9 +68,9 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const isLogin = true;
   if (isLogin) {
-    next(to);
+    return next(to);
   } else {
-    next("/login");
+    return next("/login");
   }
 });
 

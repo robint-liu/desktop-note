@@ -1,28 +1,32 @@
 <template>
-  <div class="home page-common" style="height: calc(100vh - 40px)">
-    <Banner />
-    <Notice />
+  <div id="app">
+    <Header />
+    <Menu>
+      <template #menuRight>
+        <router-view />
+      </template>
+    </Menu>
   </div>
 </template>
 
 <script>
-// Banner组件
-import Banner from "@components/banner/index.vue";
-// 右侧公告栏等组件
-import Notice from "@components/notice/index.vue";
-import "@common/style/common.less";
+// Header组件
+import Header from "@components/header/index.vue";
+// 左侧菜单组件
+import Menu from "@components/menu/index.vue";
 
 export default {
   name: "home",
   components: {
-    Banner,
-    Notice
+    Header,
+    Menu
   }
 };
 </script>
 
 <style scoped lang="less">
-.page-common {
-  padding: 0;
+#app {
+  width: 100%;
+  position: relative;
 }
 </style>

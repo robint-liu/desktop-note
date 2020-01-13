@@ -1,5 +1,4 @@
 import Vue from "vue";
-import App from "./App";
 import router from "./router";
 import store from "./store";
 import moment from "moment";
@@ -16,5 +15,5 @@ Vue.prototype.$moment = moment;
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h("router-view")
 }).$mount("#app");

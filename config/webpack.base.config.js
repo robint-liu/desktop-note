@@ -72,7 +72,7 @@ module.exports = {
     index: path.resolve(__dirname, "../src/main.js")
   },
   //调试工具
-  devtool: "source-map",
+  devtool: "cheap-module-eval-source-map",
   // 打包出口
   output: {
     pathinfo: true,

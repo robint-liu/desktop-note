@@ -29,12 +29,15 @@
         </a-input>
       </a-form-item>
       <a-form-item>
-        <a class="register">
+        <a class="register" v-show="showRegister" @click="toRegister">
           免费注册
         </a>
-        <a-button type="primary" html-type="submit" class="login">
-          登录
-        </a-button>
+        <a-button
+          type="primary"
+          html-type="submit"
+          class="login"
+          v-text="showRegister ? '登录' : '注册'"
+        />
       </a-form-item>
     </a-form>
   </div>
@@ -45,13 +48,21 @@ export default {
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "register_login" });
   },
+  data() {
+    return {
+      showRegister: true
+    };
+  },
   methods: {
+    toRegister() {
+      this.showRegister = false;
+    },
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log("values: ", values);
-          // todo 1、存储在将indexDB和cookie中；2、将indexDB 数据库名与account进行耦合，${account}@将ndexDB
+          console.log("values: ", this.showRegister, values);
+          // todo 1、存储在将indexDB和cookie中；2、将indexDB 数据库名与account进行耦合，${account}@将indexDB
           // 将用户信息存储在indexDB中
           // cookie存储情况：${account}@isLogin，过期时间为三天，三天后重新登录
         }

@@ -36,8 +36,7 @@ export default [
     title: "状态",
     dataIndex: "status",
     align: "center",
-    customRender: text =>
-      (group.status.find(item => item.value == text) || {}).label,
+    customRender: text => (group.find(item => item.value == text) || {}).label,
     filters: [
       { value: "0", text: "已取消" },
       { value: "1", text: "进行中" },

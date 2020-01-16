@@ -6,14 +6,9 @@
         <a-select
           mode="multiple"
           @change="onSubmit"
-          style="width: 100%"
-          placeholder="Please select"
-          v-decorator="[
-            'group',
-            {
-              initialValue: '0'
-            }
-          ]"
+          style="width: 100px"
+          placeholder="请选择"
+          v-decorator="['group']"
         >
           <a-select-option v-for="i in group" :key="i.value">{{
             i.label
@@ -24,14 +19,9 @@
       <!-- 时间 -->
       <a-form-item label="时间">
         <a-date-picker
-          v-decorator="[
-            'time',
-            {
-              initialValue: this.$moment(this.$moment(), 'YYYY-MM-DD')
-            }
-          ]"
+          v-decorator="['time']"
           format="YYYY-MM-DD"
-          placeholder="Please Select"
+          placeholder="请选择"
           @change="onSubmit"
           @ok="onSubmit"
         />
@@ -43,7 +33,7 @@
           v-decorator="['text']"
           style="width: 100%"
           @change="onSubmit"
-          placeholder="Please input"
+          placeholder="请输入"
         />
       </a-form-item>
     </a-form>
@@ -73,7 +63,8 @@ export default {
           if (!err) {
             const values = {
               ...fieldsValue,
-              time: fieldsValue["time"].format("YYYY-MM-DD")
+              time:
+                fieldsValue["time"] && fieldsValue["time"].format("YYYY-MM-DD")
             };
             this.$store.commit("updateMemoCondition", values);
             this.search();

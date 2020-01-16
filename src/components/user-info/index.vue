@@ -23,7 +23,7 @@
  * */
 
 import API from "@common/api";
-
+import { getCookie } from "@util/cookie";
 export default {
   name: "index.vue",
   data() {
@@ -54,7 +54,9 @@ export default {
   },
   async created() {
     // 更新个人信息
-    const { data = [], success } = await API.getUserInfo();
+    const { data = [], success } = await API.getUserInfo({
+      account: getCookie("loginAccount")
+    });
     const { avatar, signature } = data[0];
     if (success) {
       this.avatar = avatar;

@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Login from "@components/login";
 import Home from "@components/home";
+import { getCookie } from "@util/cookie";
 
 Vue.use(Router);
 
@@ -78,17 +79,13 @@ const router = new Router({
   ]
 });
 
-// 设置全局前置守卫：检验cookie是否登录，然后重定向到login
 router.beforeEach((to, from, next) => {
-  const isLogin = true;
-  if (isLogin) {
-    console.log("isLogin", isLogin);
-    next();
-    return false;
-  } else {
+  const isLogin = getCookie("isLogin");
+  if (to.path !== "/login" && !isLogin) {
     next("/login");
-    return false;
+    return;
   }
+  next();
 });
 
 export default router;

@@ -9,12 +9,40 @@
  * */
 
 class HandleIndexDb {
-  formatData(data) {
-    return {
-      success: true,
-      errorMessage: null,
-      data: data
-    };
+  formatData(data, type) {
+    console.log("type", type);
+    switch (type) {
+      case undefined:
+        if (!data || !data.length) {
+          return {
+            success: false,
+            code: 200,
+            errorMessage: "操作失败！",
+            data: data
+          };
+        }
+        return {
+          success: true,
+          code: 200,
+          errorMessage: null,
+          data: data
+        };
+      default:
+        if (!data) {
+          return {
+            success: false,
+            code: 200,
+            errorMessage: "内容为空！",
+            data: data
+          };
+        }
+        return {
+          success: true,
+          code: 200,
+          errorMessage: null,
+          data: data
+        };
+    }
   }
   async operationDB(params) {
     // dbName：表名；type：操作名
@@ -44,7 +72,7 @@ class HandleIndexDb {
         }
       }
     );
-    return this.formatData(tranRes);
+    return this.formatData(tranRes, type);
   }
 }
 
@@ -55,7 +83,6 @@ const apiControl = async params => {
   const data = await handleIndexDb.operationDB(params);
   console.log("API_data --> ", data);
   return data;
-  // return handleIndexDb.formatData(data);
 };
 
 export default apiControl;

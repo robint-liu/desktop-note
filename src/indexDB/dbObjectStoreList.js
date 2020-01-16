@@ -10,13 +10,20 @@ export default [
       },
       {
         name: "姓名",
-        key: "name",
+        key: "name"
+      },
+      {
+        name: "账户",
+        key: "account",
         syntax: "unique"
       },
       {
+        name: "密码",
+        key: "password"
+      },
+      {
         name: "签名",
-        key: "signature",
-        syntax: "unique"
+        key: "signature"
       }
     ]
   },

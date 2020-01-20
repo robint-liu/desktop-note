@@ -18,7 +18,6 @@ export const setCookie = data => {
 export const getCookie = cname => {
   const name = cname + "=";
   const cookie = document.cookie.split(";");
-  debugger;
   for (let item of cookie) {
     item = item.trim();
     if (item.includes(name)) {

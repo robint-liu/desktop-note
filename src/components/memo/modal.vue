@@ -115,10 +115,11 @@ export default {
           if (!err) {
             this.confirmLoading = true;
             const { id, isCopy } = this.initialData;
+            const idObj = isCopy ? { id } : {};
             const values = {
               ...fieldsValue,
               time: fieldsValue["time"].format("YYYY-MM-DD"),
-              id: isCopy ? undefined : id
+              ...idObj
             };
             this.$store.commit("updateMemoCondition", values);
             const { success } = await API.addOrEditMemoList(values);

@@ -146,10 +146,11 @@ export default {
           if (!err) {
             this.confirmLoading = true;
             const { id, isCopy } = this.initialData;
+            const idObj = isCopy ? { id } : {};
             const values = {
               ...fieldsValue,
-              time: fieldsValue["time"].format("YYYY-MM-DD")
-              // id: isCopy ? "" : id
+              time: fieldsValue["time"].format("YYYY-MM-DD"),
+              ...idObj
             };
             this.$store.commit("updateTodoCondition", values);
             const { success } = await API.addOrEditTodoList(values);

@@ -46,17 +46,14 @@ class HandleIndexDb {
   }
   async operationDB(params) {
     // dbName：表名；type：操作名
-    const {
-      dbName,
-      data,
-      data: { id, ...rest },
-      type
-    } = params || {};
+    const { dbName, data = {}, type } = params || {};
+    const { id, ...rest } = data || {};
     const desktopNote_DB = window.desktopNote_DB[dbName];
     const tranRes = await window.desktopNote_DB.transaction(
       "rw",
       desktopNote_DB,
       async () => {
+        let hasValue = false;
         switch (type) {
           case "add":
             return await desktopNote_DB.add(data);
@@ -68,7 +65,24 @@ class HandleIndexDb {
               .equals(id)
               .modify(rest);
           default:
-            return await desktopNote_DB.where(data).toArray();
+            for (const value of Object.values(data)) {
+              if (!Object.is(value, undefined)) {
+                hasValue = true;
+                break;
+              }
+            }
+            console.log("hasValue", hasValue);
+            if (hasValue) {
+              return await desktopNote_DB
+                .where(data)
+                .limit(10)
+                .toArray();
+            } else {
+              return await desktopNote_DB
+                .orderBy(":id")
+                .limit(10)
+                .toArray();
+            }
         }
       }
     );

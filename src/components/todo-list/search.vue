@@ -4,7 +4,6 @@
       <!-- 分组 -->
       <a-form-item label="分组">
         <a-select
-          mode="multiple"
           @change="onSubmit"
           style="width: 100px"
           placeholder="请选择"
@@ -17,7 +16,14 @@
       </a-form-item>
 
       <!-- 优先级 -->
-      <a-form-item label="优先级" extra="不小于1的正整数，值越大，优先级越高">
+      <a-form-item>
+        <span slot="label">
+          优先级&nbsp;
+          <a-tooltip title="不小于1的正整数，值越大，优先级越高">
+            <a-icon type="question-circle-o" />
+          </a-tooltip>
+        </span>
+
         <a-input-number
           :min="1"
           @change="onSubmit"
@@ -95,6 +101,7 @@ export default {
           if (!err) {
             const values = {
               ...fieldsValue,
+
               time:
                 fieldsValue["time"] && fieldsValue["time"].format("YYYY-MM-DD")
             };

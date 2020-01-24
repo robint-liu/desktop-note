@@ -24,7 +24,7 @@
             }
           ]"
           format="YYYY-MM-DD"
-          placeholder="Please Select"
+          placeholder="请选择"
           :disabledDate="disabledDate"
           :ok="() => {}"
         />
@@ -34,7 +34,7 @@
       <a-form-item v-bind="formItemLayout" label="分组">
         <a-select
           style="width: 100%"
-          placeholder="Please select"
+          placeholder="请选择"
           v-decorator="[
             'group',
             {
@@ -50,11 +50,14 @@
       </a-form-item>
 
       <!-- 优先级 -->
-      <a-form-item
-        v-bind="formItemLayout"
-        label="优先级"
-        extra="不小于1的正整数，值越大，优先级越高"
-      >
+      <!--      <a-form-item labelCol="{span: 4}" wrapperCol="{ span: 16 }">-->
+      <a-form-item v-bind="formItemLayout">
+        <span slot="label">
+          优先级&nbsp;
+          <a-tooltip title="不小于1的正整数，值越大，优先级越高">
+            <a-icon type="question-circle-o" />
+          </a-tooltip>
+        </span>
         <a-input-number
           :min="1"
           style="width: 100%"
@@ -65,7 +68,7 @@
               initialValue: initialData.order
             }
           ]"
-          placeholder="Please Select"
+          placeholder="请输入"
         />
       </a-form-item>
 
@@ -80,7 +83,7 @@
             }
           ]"
           style="width: 100%"
-          placeholder="Please input"
+          placeholder="请输入"
         />
       </a-form-item>
 
@@ -109,8 +112,8 @@ export default {
       group: group,
       confirmLoading: false,
       formItemLayout: {
-        labelCol: { span: 3 },
-        wrapperCol: { span: 20 }
+        labelCol: { span: 5 },
+        wrapperCol: { span: 18 }
       }
     };
   },

@@ -8,7 +8,7 @@ class IndexDB {
     this.createIndexDB();
   }
   createIndexDB() {
-    // 新建数据库
+    // 新建数据库 todo 重新生成数据库索引
     const db = new Dexie("desktopNote_DB");
     window.desktopNote_DB = db;
     console.log("desktopNote_DB数据库版本 --> ", db.verno);

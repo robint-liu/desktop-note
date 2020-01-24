@@ -10,7 +10,6 @@
 
 class HandleIndexDb {
   formatData(data, type) {
-    console.log("type", type);
     switch (type) {
       case undefined:
         if (!data || !data.length) {

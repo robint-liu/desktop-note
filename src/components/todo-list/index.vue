@@ -24,7 +24,9 @@ export default {
   methods: {
     async query() {
       console.log("search_params", this.$store.state.todoListCondition);
-      const { data, success } = await API.getTodoList();
+      const { data, success } = await API.getTodoList(
+        this.$store.state.todoListCondition
+      );
       if (success) {
         this.$store.commit("updateTodoList", data);
       }

@@ -4,7 +4,6 @@
       <!-- 分组 -->
       <a-form-item label="分组">
         <a-select
-          mode="multiple"
           @change="onSubmit"
           style="width: 100px"
           placeholder="请选择"
@@ -41,9 +40,9 @@
 </template>
 
 <script>
-import { group } from "@common/constant";
-
-export default {
+  import {group} from "@common/constant";
+  
+  export default {
   name: "search.vue",
   props: {
     search: Function
@@ -59,17 +58,14 @@ export default {
       // 函数防抖
       clearTimeout(this.dialogConfirmTimer);
       this.dialogConfirmTimer = setTimeout(() => {
-        this.form.validateFields(async (err, fieldsValue) => {
-          if (!err) {
-            const values = {
-              ...fieldsValue,
-              time:
-                fieldsValue["time"] && fieldsValue["time"].format("YYYY-MM-DD")
-            };
-            this.$store.commit("updateMemoCondition", values);
-            this.search();
-          }
-        });
+        const fieldsValue = this.form.getFieldsValue();
+        const values = {
+          ...fieldsValue,
+          time:
+            fieldsValue["time"] && fieldsValue["time"].format("YYYY-MM-DD")
+        };
+        this.$store.commit("updateMemoCondition", values);
+        this.search();
       }, 100);
     }
   },

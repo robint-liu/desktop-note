@@ -10,38 +10,40 @@
 
 class HandleIndexDb {
   formatData(data, type) {
+    let result = {
+      success: !!data,
+      errorMessage: "操作失败！",
+      data: data
+    };
     switch (type) {
       case undefined:
-        if (!data || !data.length) {
-          return {
-            success: false,
-            code: 200,
-            errorMessage: "操作失败！",
-            data: data
-          };
-        }
-        return {
-          success: true,
-          code: 200,
+        result = Object.assign({}, result, {
+          errorMessage: data ? null : "操作失败！"
+        });
+        break;
+      case "delete":
+        result = Object.assign({}, result, {
           errorMessage: null,
-          data: data
-        };
+          data: !data,
+          success: !data
+        });
+        break;
+      case "login":
+        result = Object.assign({}, result, {
+          errorMessage: data.length ? null : "无账号信息！",
+          data: data,
+          success: !!data.length
+        });
+        break;
       default:
-        if (!data) {
-          return {
-            success: false,
-            code: 200,
-            errorMessage: "内容为空！",
-            data: data
-          };
-        }
-        return {
-          success: true,
-          code: 200,
-          errorMessage: null,
-          data: data
-        };
+        result = Object.assign({}, result, {
+          errorMessage: data ? null : "内容为空！",
+          data: !!data
+        });
+        break;
     }
+  
+    return result;
   }
   async operationDB(params) {
     // dbName：表名；type：操作名
@@ -52,10 +54,20 @@ class HandleIndexDb {
       "rw",
       desktopNote_DB,
       async () => {
-        let hasValue = false;
+        let hasValue;
+        const params = {};
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            const value = data[key];
+            if (!Object.is(value, undefined)) {
+              hasValue = true;
+              params[key] = value;
+            }
+          }
+        }
         switch (type) {
           case "add":
-            return await desktopNote_DB.add(data);
+            return await desktopNote_DB.add(params);
           case "delete":
             return await desktopNote_DB.delete(id);
           case "update":
@@ -63,25 +75,21 @@ class HandleIndexDb {
               .where(":id")
               .equals(id)
               .modify(rest);
-          default:
-            for (const value of Object.values(data)) {
-              if (!Object.is(value, undefined)) {
-                hasValue = true;
-                break;
-              }
-            }
-            console.log("hasValue", hasValue);
+          default: {
+            let dbData;
             if (hasValue) {
-              return await desktopNote_DB
-                .where(data)
+              dbData = await desktopNote_DB
+                .where(params)
                 .limit(10)
                 .toArray();
             } else {
-              return await desktopNote_DB
+              dbData = await desktopNote_DB
                 .orderBy(":id")
                 .limit(10)
                 .toArray();
             }
+            return dbData;
+          }
         }
       }
     );
@@ -92,7 +100,6 @@ class HandleIndexDb {
 const handleIndexDb = new HandleIndexDb();
 
 const apiControl = async params => {
-  console.log("API_params --> ", params);
   const data = await handleIndexDb.operationDB(params);
   console.log("API_data --> ", data);
   return data;

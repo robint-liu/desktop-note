@@ -13,9 +13,12 @@
       <!-- 时间 -->
       <a-form-item v-bind="formItemLayout" label="时间">
         <a-date-picker
-          v-bind:showToday="false"
-          style="width: 100%"
-          v-decorator="[
+                :disabledDate="disabledDate"
+                format="YYYY-MM-DD"
+                placeholder="请选择"
+                style="width: 100%"
+                v-bind:showToday="false"
+                v-decorator="[
             'time',
             {
               rules: [{ required: true, message: '请选择时间' }],
@@ -23,18 +26,15 @@
                 initialData.time && this.$moment(initialData.time, 'YYYY-MM-DD')
             }
           ]"
-          format="YYYY-MM-DD"
-          placeholder="Please Select"
-          :disabledDate="disabledDate"
         />
       </a-form-item>
 
       <!-- 分组 -->
       <a-form-item v-bind="formItemLayout" label="分组">
         <a-select
-          style="width: 100%"
-          placeholder="Please select"
-          v-decorator="[
+                placeholder="请选择"
+                style="width: 100%"
+                v-decorator="[
             'group',
             {
               rules: [{ required: true, message: '请选择分组' }],
@@ -51,15 +51,15 @@
       <!-- 正文 -->
       <a-form-item v-bind="formItemLayout" label="正文">
         <a-textarea
-          v-decorator="[
+                placeholder="请输入"
+                style="width: 100%"
+                v-decorator="[
             'text',
             {
               rules: [{ required: true, message: '请输入正文' }],
               initialValue: initialData.text
             }
           ]"
-          style="width: 100%"
-          placeholder="Please input"
         />
       </a-form-item>
     </a-form>
@@ -67,10 +67,10 @@
 </template>
 
 <script>
-import { group } from "@common/constant";
-import API from "@common/api";
-
-export default {
+  import {group} from "@common/constant";
+  import API from "@common/api";
+  
+  export default {
   name: "update.vue",
   data() {
     return {
@@ -115,20 +115,19 @@ export default {
           if (!err) {
             this.confirmLoading = true;
             const { id, isCopy } = this.initialData;
-            const idObj = isCopy ? { id } : {};
+            const idObj = isCopy ? {} : {id};
             const values = {
               ...fieldsValue,
               time: fieldsValue["time"].format("YYYY-MM-DD"),
               ...idObj
             };
-            this.$store.commit("updateMemoCondition", values);
             const { success } = await API.addOrEditMemoList(values);
             if (success) {
+              this.$message.success("提交成功", 2);
               this.$store.commit("memoModalVisible");
               this.confirmLoading = false;
               this.form.resetFields();
               this.search();
-              this.$message.success("提交成功", 2);
             }
           }
         });
@@ -136,6 +135,7 @@ export default {
     },
     handleCancel() {
       this.$store.commit("memoModalVisible");
+      this.confirmLoading = false;
       this.form.resetFields();
     }
   }

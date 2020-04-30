@@ -18,8 +18,8 @@
       <!-- 优先级 -->
       <a-form-item>
         <span slot="label">
-          优先级&nbsp;
-          <a-tooltip title="不小于1的正整数，值越大，优先级越高">
+          <span>优先级&nbsp;</span>
+          <a-tooltip placement="bottomLeft" title="不小于1的正整数，值越大，优先级越高。">
             <a-icon type="question-circle-o" />
           </a-tooltip>
         </span>
@@ -60,9 +60,9 @@
 </template>
 
 <script>
-import { group } from "@common/constant";
-
-export default {
+  import {group} from "@common/constant";
+  
+  export default {
   name: "search.vue",
   props: {
     search: Function
@@ -97,22 +97,18 @@ export default {
       // 函数防抖
       clearTimeout(this.dialogConfirmTimer);
       this.dialogConfirmTimer = setTimeout(() => {
-        this.form.validateFields(async (err, fieldsValue) => {
-          if (!err) {
-            const values = {
-              ...fieldsValue,
-
-              time:
-                fieldsValue["time"] && fieldsValue["time"].format("YYYY-MM-DD")
-            };
-            this.$store.commit("updateTodoCondition", values);
-            this.search();
-          }
-        });
+        const fieldsValue = this.form.getFieldsValue();
+        const values = {
+          ...fieldsValue,
+          time: fieldsValue["time"] && fieldsValue["time"].format("YYYY-MM-DD")
+        };
+        this.$store.commit("updateTodoCondition", values);
+        this.search();
       }, 100);
     }
   },
   mounted() {
+    // 当dom元素挂载后，获取接口数据
     this.onSubmit();
   }
 };

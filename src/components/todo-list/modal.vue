@@ -53,8 +53,8 @@
       <!--      <a-form-item labelCol="{span: 4}" wrapperCol="{ span: 16 }">-->
       <a-form-item v-bind="formItemLayout">
         <span slot="label">
-          优先级&nbsp;
-          <a-tooltip title="不小于1的正整数，值越大，优先级越高">
+          <span>优先级&nbsp;</span>
+          <a-tooltip placement="topLeft" title="不小于1的正整数，值越大，优先级越高。">
             <a-icon type="question-circle-o" />
           </a-tooltip>
         </span>
@@ -101,10 +101,10 @@
 </template>
 
 <script>
-import { group } from "@common/constant";
-import API from "@common/api";
-
-export default {
+  import {group} from "@common/constant";
+  import API from "@common/api";
+  
+  export default {
   name: "update.vue",
   data() {
     return {
@@ -149,20 +149,19 @@ export default {
           if (!err) {
             this.confirmLoading = true;
             const { id, isCopy } = this.initialData;
-            const idObj = isCopy ? { id } : {};
+            const idObj = isCopy ? {} : {id};
             const values = {
               ...fieldsValue,
               time: fieldsValue["time"].format("YYYY-MM-DD"),
               ...idObj
             };
-            this.$store.commit("updateTodoCondition", values);
             const { success } = await API.addOrEditTodoList(values);
             if (success) {
+              this.$message.success("提交成功", 2);
               this.$store.commit("todoListModalVisible");
               this.confirmLoading = false;
               this.form.resetFields();
               this.search();
-              this.$message.success("提交成功", 2);
             }
           }
         });
@@ -170,6 +169,7 @@ export default {
     },
     handleCancel() {
       this.$store.commit("todoListModalVisible");
+      this.confirmLoading = false;
       this.form.resetFields();
     }
   }

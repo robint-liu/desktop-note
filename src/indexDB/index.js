@@ -1,5 +1,6 @@
 import dbObjectStoreList from "./dbObjectStoreList";
 import Dexie from "dexie";
+
 Dexie.debug = true;
 
 class IndexDB {
@@ -8,7 +9,6 @@ class IndexDB {
     this.createIndexDB();
   }
   createIndexDB() {
-    // 新建数据库 todo 重新生成数据库索引
     const db = new Dexie("desktopNote_DB");
     window.desktopNote_DB = db;
     console.log("desktopNote_DB数据库版本 --> ", db.verno);
@@ -37,31 +37,9 @@ class IndexDB {
             break;
         }
       });
-      console.log("objectStore_index ==> ", indexs);
       objectStore[key] = indexs;
     });
     db.version(1).stores(objectStore);
-    // start
-    /*db.userInfo.add({
-      id: "1",
-      name: "比诺",
-      signature: "我的世界我主宰！",
-      avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-    });
-    db.todoList.add({
-      id: "2",
-      group: "0",
-      order: 1,
-      time: "2019-12-24",
-      text: "test"
-    });
-    db.memoList.add({
-      id: "2",
-      group: "0",
-      time: "2019-12-24",
-      text: "test"
-    });*/
-    // end
   }
 }
 export default new IndexDB();

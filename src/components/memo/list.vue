@@ -44,10 +44,11 @@
 </template>
 
 <script>
-import columns from "./columns";
-import Modal from "./modal";
-
-export default {
+  import columns from "./columns";
+  import Modal from "./modal";
+  import API from "@common/api";
+  
+  export default {
   name: "list.vue",
   data() {
     return {
@@ -100,8 +101,13 @@ export default {
       this.$store.commit("memoModalVisible");
       this.initialData = Object.assign({}, record, { isCopy: true });
     },
-    handleDelete(record, index) {
-      this.$store.commit("deleteMemoList", index);
+    async handleDelete(record, index) {
+      const {success} = await API.deleteMemoList(
+        {id: record.id}
+      );
+      if (success) {
+        this.$store.commit("deleteMemoList", index);
+      }
     }
   }
 };

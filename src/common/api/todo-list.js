@@ -1,6 +1,6 @@
 import util from "@util";
 import apiControl from "./apiControler";
-import { useHttpForApi } from "@root/local.config";
+import {useHttpForApi} from "@root/local.config";
 
 const todoList = async params =>
   useHttpForApi ? util.axios(params) : await apiControl(params);
@@ -11,6 +11,17 @@ export default {
     const params = {
       dbName: "todoList",
       url: "/todoList/list",
+      data
+    };
+    return todoList(params);
+  },
+  
+  /* 删除list item */
+  deleteTodoList(data) {
+    const params = {
+      dbName: "todoList",
+      type: "delete",
+      url: "/todoList/delete",
       data
     };
     return todoList(params);

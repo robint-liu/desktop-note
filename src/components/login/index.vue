@@ -7,7 +7,18 @@
           v-decorator="[
             'account',
             {
-              rules: [{ required: true, message: '请输入账号!' }]
+              rules: [
+                {
+                  whitespace: Boolean(1),
+                  required: Boolean(1),
+                  message: '请输入账号！'
+                },
+                { min: 4, max: 10, message: '账号位数最短4位，最多10位！' },
+                {
+                  pattern: /[a-zA-Z]+[0-9]+_?/,
+                  message: '账号必须同时包含数字和字母！'
+                }
+              ]
             }
           ]"
           placeholder="账号"
@@ -34,7 +45,14 @@
           v-decorator="[
             'password',
             {
-              rules: [{ required: true, message: '请输入密码!' }]
+              rules: [
+                {
+                  whitespace: Boolean(1),
+                  required: Boolean(1),
+                  message: '请输入密码!'
+                },
+                { min: 6, max: 10, message: '账号密码最短6位，最多10位！' }
+              ]
             }
           ]"
           type="password"
@@ -62,9 +80,10 @@
 </template>
 
 <script>
-import API from "@common/api";
-import { setCookie } from "@util/cookie";
-export default {
+  import API from "@common/api";
+  import {setCookie} from "@util/cookie";
+  
+  export default {
   name: "login",
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "register_login" });
@@ -83,7 +102,6 @@ export default {
       e.preventDefault();
       this.form.validateFields(async (err, values) => {
         if (!err) {
-          console.log("values: ", values);
           if (this.showRegister) {
             // 登录处理
             const { success } = await API.getUserInfo(values);
@@ -100,7 +118,7 @@ export default {
             // 注册处理
             values = Object.assign(values, {
               avatar:
-                "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+                "http://img1.imgtn.bdimg.com/it/u=2193213018,2505768407&fm=26&gp=0.jpg",
               signature: "我的世界我主宰！"
             });
             const { success } = await API.addUserInfo(values);

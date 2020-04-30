@@ -15,6 +15,7 @@ export default {
   getUserInfo(data) {
     const params = {
       url: "/userInfo/get",
+      type: "login",
       data: {
         ...data
       }

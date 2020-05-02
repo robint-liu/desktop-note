@@ -1,14 +1,14 @@
 <template>
   <div class="my-menu">
     <a-menu
-            :defaultOpenKeys="['about']"
-            :defaultSelectedKeys="[menuKey]"
-            :inlineCollapsed="isMenuCollapsed"
-            @click="clickMenu"
-            class="ul-menu"
-            mode="inline"
-            style="{border-right: 0}"
-            theme="light"
+      :defaultOpenKeys="['about']"
+      :defaultSelectedKeys="[menuKey]"
+      :inlineCollapsed="isMenuCollapsed"
+      @click="clickMenu"
+      class="ul-menu"
+      mode="inline"
+      style="{border-right: 0}"
+      theme="light"
     >
       <a-menu-item key="index">
         <a-icon type="home" />
@@ -45,19 +45,27 @@
 </template>
 
 <script>
-  import util from "@util";
-  
-  export default {
+import util from "@util";
+
+export default {
   name: "onlyMenu",
-    created() {
-      // 根据url path 设定默认菜单key
-      this.getMenuKey();
-    },
+  data() {
+    return {
+      menuKey: "index"
+    };
+  },
+  created() {
+    // 根据url path 设定默认菜单key
+    this.getMenuKey();
+  },
   methods: {
     getMenuKey() {
       // 匹配末尾path
       const regx = /(?<=\/)[a-zA-Z]+$/;
-      this.menuKey = this.$route.path.match(regx)[0] || "index";
+      const matchValue = this.$route.path.match(regx);
+      if (matchValue) {
+        this.menuKey = matchValue[0];
+      }
     },
     clickMenu({ keyPath }) {
       const route = util.getRoute(keyPath);

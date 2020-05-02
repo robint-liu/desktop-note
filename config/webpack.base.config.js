@@ -63,8 +63,7 @@ let plugins = [
     }
   })
 ];
-
-const isEnv = process.env.NODE_ENV === "development";
+const isDev = process.env.NODE_ENV === "development";
 
 module.exports = {
   // 打包入口
@@ -72,12 +71,13 @@ module.exports = {
     index: path.resolve(__dirname, "../src/main.js")
   },
   //调试工具
-  devtool: "cheap-module-eval-source-map",
+  // devtool: "cheap-module-eval-source-map",
+  devtool: "source-map",
   // 打包出口
   output: {
     pathinfo: true,
     path: path.join(__dirname, "../dist/"),
-    publicPath: isEnv
+    publicPath: isDev
       ? "http://0.0.0.0:8888/"
       : path.join(__dirname, "../dist/"),
     filename: "js/[name].bundle.js"
@@ -131,7 +131,7 @@ module.exports = {
         test: /\.(sass|scss)$/,
         exclude: "/node_modules/",
         loader: [
-          isEnv ? "style-loader" : MiniCssExtractPlugin.loader, // Adds CSS to the DOM by injecting a <style> tag,
+          isDev ? "style-loader" : MiniCssExtractPlugin.loader, // Adds CSS to the DOM by injecting a <style> tag,
           "css-loader", // The css-loader interprets @import and url() like import/require() and will resolve them
           "postcss-loader", // PostCSS is a tool for transforming styles with JS plugins，The Autoprefixer PostCSS plugin is one of the most popular CSS processors.
           "fast-sass-loader" // Blazingly fass loader for webpack

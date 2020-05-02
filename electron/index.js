@@ -5,12 +5,11 @@ const url = require("url");
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
 
-// 用来监听是否为开发环境
-const isDev = process.env.NODE_ENV === "development";
-
 let win;
 
 function createWindow() {
+  // 用来监听是否为开发环境
+  const isDev = process.env.NODE_ENV === "development";
   win = new BrowserWindow({
     width: 1000,
     height: 800,

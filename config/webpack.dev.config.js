@@ -1,5 +1,6 @@
 const path = require("path");
 const merge = require("webpack-merge");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const proxyOptions = require("./auxiliary-config/proxy-options");
 const baseConfig = require("./webpack.base.config");
 
@@ -20,4 +21,14 @@ if (isProxy) {
   devServer = Object.assign(devServer, { proxy: { "/mock": proxyOptions } });
 }
 
-module.exports = merge(baseConfig, { devServer });
+module.exports = merge(baseConfig, {
+  devServer,
+  mode: "development",
+  plugins: [
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: path.resolve(__dirname, "../src/assets/template.html"),
+      favicon: path.resolve(__dirname, "../src/assets/favicon.ico")
+    })
+  ]
+});

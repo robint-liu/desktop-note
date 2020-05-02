@@ -1,23 +1,40 @@
-/*
- *  content：webpack.base.config.js + uglifyJs
- * */
-
+const path = require("path");
 const merge = require("webpack-merge");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const baseConfig = require("./webpack.base.config");
 
 module.exports = merge(baseConfig, {
+  mode: "production",
   optimization: {
-    minimize: true
-  }
-  // plugins: [
-  //   new webpack.optimize.UglifyJsPlugin({
-  //     sourceMap: false,
-  //     compress: {
-  //       warnings: false,
-  //       minimize: true,
-  //       drop_debugger: true,
-  //       drop_console: true
-  //     }
-  //   })
-  // ]
+    minimize: true,
+    splitChunks: {
+      chunks: "async",
+      minChunks: 3,
+      automaticNameDelimiter: "~"
+    },
+    runtimeChunk: true
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "../src/assets/template.html"),
+      hash: true,
+      filename: "index.html",
+      showErrors: true,
+      inject: true,
+      title: "桌面记",
+      favicon: path.resolve(__dirname, "../src/assets/favicon.ico"),
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      }
+    })
+  ]
 });

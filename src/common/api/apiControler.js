@@ -30,9 +30,9 @@ class HandleIndexDb {
         break;
       case "login":
         result = Object.assign({}, result, {
-          errorMessage: data.length ? null : "无账号信息！",
+          errorMessage: data && data.length ? null : "无账号信息！",
           data: data,
-          success: !!data.length
+          success: !!(data && data.length)
         });
         break;
       default:
@@ -42,7 +42,7 @@ class HandleIndexDb {
         });
         break;
     }
-  
+
     return result;
   }
   async operationDB(params) {

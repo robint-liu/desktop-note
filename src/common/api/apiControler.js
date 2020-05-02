@@ -50,10 +50,8 @@ class HandleIndexDb {
     const { dbName, data = {}, type } = params || {};
     const { id, ...rest } = data || {};
     const desktopNote_DB = window.desktopNote_DB[dbName];
-    const tranRes = await window.desktopNote_DB.transaction(
-      "rw",
-      desktopNote_DB,
-      async () => {
+    const tranRes = await window.desktopNote_DB
+      .transaction("rw", dbName, async () => {
         let hasValue;
         const params = {};
         for (const key in data) {
@@ -91,8 +89,8 @@ class HandleIndexDb {
             return dbData;
           }
         }
-      }
-    );
+      })
+      .catch(error => console.error(error.stack));
     return this.formatData(tranRes, type);
   }
 }
@@ -100,6 +98,7 @@ class HandleIndexDb {
 const handleIndexDb = new HandleIndexDb();
 
 const apiControl = async params => {
+  console.log("API_params --> ", params);
   const data = await handleIndexDb.operationDB(params);
   console.log("API_data --> ", data);
   return data;

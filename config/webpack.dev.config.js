@@ -29,6 +29,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
+      title: "桌面记",
       template: path.resolve(__dirname, "../src/assets/template.html"),
       favicon: path.resolve(__dirname, "../src/assets/favicon.ico")
     })

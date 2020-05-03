@@ -19,6 +19,7 @@ const { demandPathsAble, demandPaths, entryFilesSuffix } = localConfig || {};
 // console.log("entries", entries);
 
 module.exports = {
+  target: "electron-renderer",
   // 打包入口
   entry: {
     index: [
@@ -26,8 +27,7 @@ module.exports = {
       path.resolve(__dirname, "../src/main.js")
     ]
   },
-  //调试工具
-  devtool: "cheap-module-eval-source-map",
+
   // 打包出口
   output: {
     pathinfo: true,
@@ -69,11 +69,7 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: "/node_modules/",
-        loader: [
-          "style-loader",
-          "style-loader",
-          "css-loader"
-        ]
+        loader: ["style-loader", "style-loader", "css-loader"]
       },
       {
         test: /\.(sass|scss)$/,
@@ -88,12 +84,7 @@ module.exports = {
       {
         test: /\.less$/,
         exclude: "/node_modules/",
-        loader: [
-          "style-loader",
-          "css-loader",
-          "postcss-loader",
-          "less-loader"
-        ]
+        loader: ["style-loader", "css-loader", "postcss-loader", "less-loader"]
       },
       {
         test: /\.(png|jpe?g|git)$/,

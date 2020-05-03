@@ -23,6 +23,8 @@ if (isProxy) {
 
 module.exports = merge(baseConfig, {
   devServer,
+  //调试工具
+  devtool: "source-map",
   mode: "development",
   plugins: [
     new HtmlWebpackPlugin({

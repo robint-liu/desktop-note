@@ -5,6 +5,8 @@ const baseConfig = require("./webpack.base.config");
 
 module.exports = merge(baseConfig, {
   mode: "production",
+  //调试工具
+  devtool: "cheap-module-eval-source-map",
   optimization: {
     minimize: true,
     splitChunks: {

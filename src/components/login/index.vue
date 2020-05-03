@@ -106,10 +106,14 @@
             // 登录处理
             const { success } = await API.getUserInfo(values);
             if (success) {
-              setCookie([
-                { name: "isLogin", value: true },
-                { name: "loginAccount", value: values.account }
-              ]);
+              await setCookie({
+                name: "isLogin",
+                value: "true"
+              });
+              await setCookie({
+                name: "loginAccount",
+                value: values.account
+              });
               this.$router.push("/index");
             } else {
               this.$message.error("账号或密码不存在！");
@@ -139,7 +143,7 @@
 .login-register-wrap {
   height: 100%;
   position: relative;
-  background: #908e94 url(../../assets/banner.png) no-repeat center / 100% 100%;
+  background: #908e94 url(../../assets/banner.png) no-repeat center / cover;
   .form {
     box-sizing: content-box;
     width: 300px;

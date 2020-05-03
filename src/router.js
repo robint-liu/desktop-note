@@ -2,13 +2,12 @@ import Vue from "vue";
 import Router from "vue-router";
 import Login from "@components/login";
 import Home from "@components/home";
-import { getCookie } from "@util/cookie";
+import {getCookie} from "@util/cookie";
 
 Vue.use(Router);
 
 const router = new Router({
   mode: "history",
-  base: process.env.BASE_URL,
   routes: [
     {
       path: "/login",
@@ -80,9 +79,14 @@ const router = new Router({
   ]
 });
 
-router.beforeEach((to, from, next) => {
-  const isLogin = getCookie("isLogin");
-  if (to.path !== "/login" && !isLogin) {
+router.beforeEach(async (to, from, next) => {
+  const isLogin = await getCookie({name: "isLogin"});
+  if (
+    to.path !== "/login" &&
+    (!isLogin ||
+      (isLogin && isLogin.length === 0) ||
+      (isLogin[0] && isLogin[0].value !== "true"))
+  ) {
     next("/login");
     return;
   }

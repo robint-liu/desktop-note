@@ -13,18 +13,19 @@
 </template>
 
 <script>
-/*
- * @title: 头像功能模块；
- * @date：2019/09/27
- * @feature：
- *    1、获取本地数据进而展示头像和签名
- *    2、当头像为空时，替换为头像 icon
- *    3、当签名为空时，空时不予显示
- * */
-
-import API from "@common/api";
-import { getCookie } from "@util/cookie";
-export default {
+  /*
+   * @title: 头像功能模块；
+   * @date：2019/09/27
+   * @feature：
+   *    1、获取本地数据进而展示头像和签名
+   *    2、当头像为空时，替换为头像 icon
+   *    3、当签名为空时，空时不予显示
+   * */
+  
+  import API from "@common/api";
+  import {getCookie} from "@util/cookie";
+  
+  export default {
   name: "index.vue",
   data() {
     return {
@@ -54,8 +55,9 @@ export default {
   },
   async created() {
     // 更新个人信息
+    const userInfo = await getCookie({name: "loginAccount"});
     const { data = [], success } = await API.getUserInfo({
-      account: getCookie("loginAccount")
+      account: userInfo[0] && userInfo[0].value
     });
     const { avatar, signature } = data[0];
     if (success) {
